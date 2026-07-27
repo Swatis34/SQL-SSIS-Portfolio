@@ -1,0 +1,15 @@
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Build Output
+bin/
+obj/
+
+# SSIS
+*.ispac
+
+# Database
+*.database
