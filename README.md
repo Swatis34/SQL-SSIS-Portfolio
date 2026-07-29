@@ -121,6 +121,35 @@ If customer city changes:
 - Valid records loaded into `Customer_Validated`.
 - Invalid records redirected to `Rejected_Customers.txt`.
 
+## 5. Merge Join
+
+**Objective**
+
+- Combine customer and order data using a common key (`CustomerID`).
+
+**Transformations Used**
+
+- OLE DB Source
+- Sort
+- Merge Join
+- OLE DB Destination
+
+**Join Types Practiced**
+
+- Inner Join
+- Left Outer Join
+- Full Outer Join
+
+**Key Learning**
+
+- Merge Join requires both inputs to be sorted.
+- Merge combines rows (similar to UNION ALL).
+- Merge Join combines columns based on a matching key (similar to SQL JOIN).
+
+**Output**
+
+- Created a consolidated customer-order report.
+
 ## Folder Structure
 
 ```
