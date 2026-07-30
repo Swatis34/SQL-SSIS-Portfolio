@@ -121,6 +121,8 @@ If customer city changes:
 - Valid records loaded into `Customer_Validated`.
 - Invalid records redirected to `Rejected_Customers.txt`.
 
+---
+
 ## 5. Merge Join
 
 **Objective**
@@ -149,6 +151,95 @@ If customer city changes:
 **Output**
 
 - Created a consolidated customer-order report.
+
+---
+
+# Package 06 - ForEach Loop Container
+
+## Objective
+
+Demonstrate how to process multiple flat files dynamically using SSIS ForEach Loop Container and Expressions without creating multiple Data Flow Tasks.
+
+## Components Used
+
+- ForEach Loop Container
+- Flat File Connection Manager
+- Flat File Source
+- OLE DB Destination
+- Variables
+- Expressions
+
+## Package Flow
+
+ForEach Loop Container
+↓
+Data Flow Task
+↓
+Flat File Source
+↓
+OLE DB Destination
+
+## Configuration
+
+### ForEach Loop
+
+- Enumerator: ForEach File Enumerator
+- Folder: InputFiles
+- Files: \*.txt
+- Retrieve File Name: Fully Qualified
+
+### Variable
+
+- User::FileName
+
+### Expression
+
+Flat File Connection Manager → ConnectionString
+
+```
+@[User::FileName]
+```
+
+## Scenario
+
+- Processed multiple text files from a folder.
+- Used a single Data Flow Task to process all files.
+- Loaded records from all files into a SQL Server table.
+- Verified successful processing of all input files.
+
+## Learning Outcomes
+
+- ForEach File Enumerator
+- Variable Mapping
+- Dynamic Connection String
+- Expressions in SSIS
+- Processing multiple files using a single package
+
+---
+
+## Package 07 - Checkpoints
+
+### Objective
+
+Demonstrate SSIS Checkpoint functionality to resume package execution after a failure.
+
+### Components Used
+
+- Execute SQL Task
+- Package Checkpoints
+
+### Package Properties
+
+- SaveCheckpoints = True
+- CheckpointUsage = IfExists
+- CheckpointFileName configured
+
+### Scenario
+
+- Executed first SQL task successfully.
+- Simulated package failure using `SELECT 1/0`.
+- Fixed the failed SQL statement.
+- Re-executed the package successfully.
 
 ## Folder Structure
 
