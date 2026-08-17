@@ -241,6 +241,104 @@ Demonstrate SSIS Checkpoint functionality to resume package execution after a fa
 - Fixed the failed SQL statement.
 - Re-executed the package successfully.
 
+---
+
+## Package 08 - Event Handlers
+
+### Objective
+
+Demonstrate SSIS Event Handlers to handle task-level errors and perform additional actions when an error occurs during package execution.
+
+### Components Used
+
+- Execute SQL Task
+- Event Handler
+- OnError Event
+- Error Log Table
+- SQL Server Connection Manager
+
+### Configuration
+
+- Configured an `OnError` Event Handler for the Execute SQL Task.
+- Added an Execute SQL Task inside the `OnError` event handler.
+- Configured error logging to capture error details in an error log table.
+
+### Scenario
+
+- Intentionally generated an error using `SELECT 1/0`.
+- The Execute SQL Task failed as expected.
+- The `OnError` Event Handler was triggered.
+- Error details were inserted into the error log table.
+- Verified the error records in SQL Server.
+
+---
+
+## Package 09 - Parameters & Variables
+
+### Objective
+
+Demonstrate the use of SSIS Package Parameters, Expressions, Variables, and Parameter Mapping to make the package dynamic and reusable.
+
+### Components Used
+
+- Execute SQL Task
+- Package Parameter
+- Variable
+- Parameter Mapping
+- Result Set
+- OLE DB Connection Manager
+
+### Configuration
+
+- Created a Package Parameter for the database name.
+- Used an Expression to dynamically set the Connection Manager's database.
+- Created variables to store runtime values.
+- Configured Parameter Mapping to pass `CustomerKey` to the Execute SQL Task.
+- Configured Result Set to store the query output in a variable.
+
+### Scenario
+
+- Created a Package Parameter for database configuration.
+- Used the parameter through an Expression in the Connection Manager.
+- Passed `CustomerKey` through Parameter Mapping to the Execute SQL Task.
+- Configured the Result Set to store `CustomerName` in an SSIS variable.
+- Executed the package successfully.
+
+---
+
+## Package 10 - SSIS Logging
+
+### Objective
+
+Demonstrate SSIS Logging functionality to capture package execution details for monitoring, auditing, and troubleshooting.
+
+### Components Used
+
+- Execute SQL Task
+- SSIS Logging
+- SSIS Log Provider for SQL Server
+- SQL Server Connection Manager
+- `sysssislog` table
+
+### Logging Configuration
+
+- Log Provider = SSIS log provider for SQL Server
+- Logging configured at package level
+- Events configured:
+  - PackageStart
+  - PackageEnd
+  - OnPreExecute
+  - OnPostExecute
+  - OnProgress
+
+### Scenario
+
+- Created an Execute SQL Task with `SELECT 1/1`.
+- Enabled SSIS Logging using the SQL Server Log Provider.
+- Executed the package successfully.
+- Verified that package and task execution events were recorded in the `sysssislog` table.
+- Used the `sysssislog` table to review execution details.
+
 ## Folder Structure
 
 ```
