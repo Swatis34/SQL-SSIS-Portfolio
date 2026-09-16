@@ -384,11 +384,23 @@ Demonstrate SSIS Logging functionality to capture package execution details for 
 ## Folder Structure
 
 ```
-SQL-SSIS-Portfolio
+SQL-SSIS-Portfolio/
 │
-├── SSIS
-├── SQL_Scripts
-├── Screenshots
+├── Azure-ADF-Migration/
+│   ├── screenshots/
+│   └── README.md
+│
+├── Azure-AI-Customer-Support-Agent/
+│   ├── screenshots/
+│   └── README.md
+│
+├── Input files/
+├── SQL Scripts/
+├── SSIS/
+├── Screenshots/
+│
+├── .gitattributes
+├── .gitignore
 └── README.md
 ```
 
