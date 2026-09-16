@@ -1,0 +1,6 @@
+1 | John  | Gurgaon
+2 | Mary  | Chandigarh
+3 | David | Pune
+4 | Sam   | Bangalore
+5 | Alex  | Hyderabad
+6 | Emma  | Jaipur

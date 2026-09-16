@@ -11,8 +11,8 @@
   DTS:LocaleID="16393"
   DTS:ObjectName="02_IncrementalLoad"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{0559CFA7-F3D2-47F2-92BC-C3664F8AC991}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{ECBF1E53-33BC-4DE7-8C03-096EEC16984B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -41,7 +41,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="D:\Surbhi\SSIS OutputInputs\SalesRetailETL\Sales.txt">
+          DTS:ConnectionString="D:\Surbhi\SSIS\SalesRetailETL\Sales.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -50,7 +50,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="OrderID"
-              DTS:DTSID="{E8D2E009-5825-4148-BBDD-033CD0DC66B9}"
+              DTS:DTSID="{C782F16B-FC08-4C36-88BD-0C6A815253C5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -59,7 +59,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerID"
-              DTS:DTSID="{26850F57-8912-48B5-9D36-0800442B2880}"
+              DTS:DTSID="{2CA1637F-C92B-4D02-BF08-250295247AFC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -68,7 +68,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="ProductID"
-              DTS:DTSID="{4882254D-61DA-44EF-9334-F7EFF150E788}"
+              DTS:DTSID="{9354C6F5-858B-44A7-8246-88E5C8A968E1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -77,7 +77,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Quantity"
-              DTS:DTSID="{0C8B5ADD-A385-42DA-8156-D212EA12C293}"
+              DTS:DTSID="{D49C5DA5-2678-4EB2-A4CC-753EE6BDE248}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -86,7 +86,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="Amount"
-              DTS:DTSID="{56D1828C-4501-4B44-ADF8-771AAB6177EF}"
+              DTS:DTSID="{3EBD02F2-4D45-48FE-811E-AB480212E90B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -95,7 +95,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="OrderDate"
-              DTS:DTSID="{8EB98185-C631-46BD-96CA-319468C638CA}"
+              DTS:DTSID="{3A40D6F9-A4D5-4858-817F-115C0792D04F}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -1695,9 +1695,9 @@ where [refTable].[OrderID] = ?</property>
           Id="Package\Data Flow Task\Derived Column"
           TopLeft="350,223" />
         <NodeLayout
-          Size="165,42"
-          Id="Package\Data Flow Task\RejectSalesTable"
-          TopLeft="589,357" />
+          Size="186,42"
+          Id="Package\Data Flow Task\OLE DB Destination 1"
+          TopLeft="669,479" />
         <NodeLayout
           Size="159,42"
           Id="Package\Data Flow Task\Conditional Split"
@@ -1707,9 +1707,9 @@ where [refTable].[OrderID] = ?</property>
           Id="Package\Data Flow Task\CustomerValidation"
           TopLeft="407,293" />
         <NodeLayout
-          Size="186,42"
-          Id="Package\Data Flow Task\OLE DB Destination 1"
-          TopLeft="669,479" />
+          Size="165,42"
+          Id="Package\Data Flow Task\RejectSalesTable"
+          TopLeft="589,357" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[UpdateRows]"
           TopLeft="399.5,542">
@@ -2001,7 +2001,7 @@ where [refTable].[OrderID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\RejectSalesTable">
+    design-time-name="Package\Data Flow Task\OLE DB Destination 1">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2037,7 +2037,7 @@ where [refTable].[OrderID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination 1">
+    design-time-name="Package\Data Flow Task\RejectSalesTable">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

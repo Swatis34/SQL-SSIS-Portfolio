@@ -17,88 +17,130 @@ This repository contains SQL Server and SSIS ETL projects created for interview 
 
 ## Completed Packages
 
-### 1. Customer Validation
+## Package 01 - Customer Validation
 
-**Objective**
+### Objective
 
-- Validate customer records before loading into SQL Server.
+Demonstrate SSIS data validation by processing customer records from a source file and identifying valid and invalid customer data.
 
-**Transformations Used**
-
-- Flat File Source
-- Derived Column
-- Conditional Split
-- OLE DB Destination
-
-**Output**
-
-- Valid records loaded into Customer table.
-- Invalid records redirected.
-
----
-
-### 2. Incremental Load
-
-**Objective**
-
-- Load only new customer records.
-- Skip records already present in destination.
-
-**Transformations Used**
+### Components Used
 
 - Flat File Source
+- Data Flow Task
 - Lookup
-- Conditional Split
+- Derived Column
+- Data Conversion
 - OLE DB Destination
+- SQL Server Connection Manager
 
-**Output**
+### Input
 
-- Only new records inserted.
-- Duplicate records ignored.
+- `Sales.txt` – sample source file containing customer/sales records.
+
+### Configuration
+
+- Loaded data from the `Sales.txt` source file.
+- Used Data conversion and Derived Column according to the requirement.
+- Used Lookup to validate customer records against the Sales table.
+- Loaded valid records into the destination table.
+- Redirected invalid/unmatched records for further review.
+
+### Scenario
+
+- Processed Sales records from the input Sales file.
+- Validated customer information against the existing Customer table.
+- Successfully loaded valid records into the destination.
+- Captured invalid/unmatched records separately.
+- Verified the package execution and output.
 
 ---
 
-### 3. SCD Type 2 Customer Load
+## Package 02 - Incremental Load
 
-**Objective**
+### Objective
 
-- Maintain complete history of customer changes.
+Demonstrate an SSIS incremental load process to identify existing and new records and update/insert data accordingly.
 
-**Scenario**
-If customer city changes:
+### Components Used
 
-- Existing record marked as inactive.
-- EndDate updated.
-- New record inserted.
-- New Surrogate Key generated.
-
-**Transformations Used**
-
+- Data Flow Task
+- Data Conversion
+- Derived Column
 - Lookup
 - Conditional Split
 - OLE DB Command
-- Derived Column
-- Union All
 - OLE DB Destination
-- Row Count
+- SQL Server Connection Manager
 
-**Audit Logging**
+### Configuration
 
-- Package Name
-- Start Time
-- End Time
-- Rows Inserted
-- Rows Updated
-- Status
+- Converted and prepared source data using Data Conversion and Derived Column.
+- Used Lookup to validate incoming records against existing customer/sales data.
+- Redirected unmatched records to a reject table.
+- Used Conditional Split to identify records requiring updates and new records.
+- Used OLE DB Command to update existing records.
+- Used OLE DB Destination to insert new records.
 
-**Test Result**
+### Scenario
 
-- Successfully tested with multiple source files.
-- Verified inserts and updates.
+- Processed incoming sales records incrementally.
+- Compared incoming records with existing data using Lookup.
+- Identified matching records for update and new records for insertion.
+- Updated existing records using OLE DB Command.
+- Inserted new records into the destination table.
+- Captured unmatched/rejected records separately.
+- Successfully executed and verified the package flow.
 
 ---
 
-## 4. Error Handling
+## Package 03 - SCD Type 2 Customer Load
+
+### Objective
+
+Demonstrate Slowly Changing Dimension (SCD) Type 2 implementation in SSIS to maintain historical versions of customer records when customer attributes change.
+
+### Components Used
+
+- Flat File Source
+- Data Conversion
+- Lookup
+- Derived Column
+- Conditional Split
+- Multicast
+- OLE DB Command
+- OLE DB Destination
+- SQL Server Connection Manager
+
+### Configuration
+
+- Used Lookup to identify new and existing customer records.
+- New customers were inserted directly into the Customer dimension table.
+- Existing records were checked for attribute changes.
+- Used Multicast to send changed records to two separate paths:
+  - Update the existing record and mark it as historical.
+  - Create and insert a new version of the changed customer record.
+
+- Maintained `StartDate`, `EndDate`, and `IsCurrent` to track record history.
+- Used a surrogate `CustomerKey` for different versions of the same customer.
+
+### SCD Type 2 Logic
+
+For a changed customer:
+
+- Old record → `IsCurrent = 0` and `EndDate` populated.
+- New record → new `CustomerKey`, updated attributes, `IsCurrent = 1`, and `EndDate = NULL`.
+
+### Scenario
+
+- Processed customer data from the source file.
+- Identified new, existing, and changed customer records using Lookup.
+- Inserted new customers.
+- For changed customers, updated the existing record as historical and inserted a new current version.
+- Successfully maintained customer history using SCD Type 2 logic.
+
+---
+
+## Package 04. Error Handling
 
 **Objective**
 
@@ -123,7 +165,7 @@ If customer city changes:
 
 ---
 
-## 5. Merge Join
+## Package 05. Merge Join
 
 **Objective**
 
